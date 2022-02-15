@@ -41,8 +41,16 @@ class MapParams(object):
     def update(self, event):
         if event.key == pygame.K_p and self.zoom < 19:
             self.zoom += 1
-        elif event.key == pygame.K_m and self.zoom > 2:
+        elif event.key == pygame.K_m and self.zoom > 11:
             self.zoom -= 1
+        elif event.key == pygame.K_LEFT:
+            self.lon -= LON_STEP * math.pow(2, 15 - self.zoom)
+        elif event.key == pygame.K_RIGHT:
+            self.lon += LON_STEP * math.pow(2, 15 - self.zoom)
+        elif event.key == pygame.K_UP:
+            self.lat += LAT_STEP * math.pow(2, 12 - self.zoom)
+        elif event.key == pygame.K_DOWN:
+            self.lat -= LAT_STEP * math.pow(2, 12 - self.zoom)
 
         if self.lon > 180: self.lon -= 360
         if self.lon < -180: self.lon += 360
